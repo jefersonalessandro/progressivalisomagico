@@ -1,0 +1,1557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liso Mágico Brasil | Progressiva sem formol com pagamento na entrega</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffaf6;
+      --surface: #fffdfa;
+      --surface-strong: #ffffff;
+      --fg: #14110d;
+      --muted: #6b6258;
+      --border: #eadfc8;
+      --accent: #b8860b;
+      --accent-strong: #8d6508;
+      --green: #00593f;
+      --green-soft: #e8f5ee;
+      --gold: #d9ad38;
+      --rose: #d84f86;
+      --danger: #c02d2d;
+      --font-display: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
+      --font-body: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+      --container: min(1180px, calc(100vw - clamp(24px, 5vw, 64px)));
+      --radius: 16px;
+      --shadow: 0 18px 46px rgb(70 45 5 / 15%);
+      --shadow-tight: 0 8px 22px rgb(70 45 5 / 12%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--fg);
+      background:
+        radial-gradient(circle at 84% 12%, rgb(217 173 56 / 12%), transparent 25rem),
+        radial-gradient(circle at 8% 32%, rgb(216 79 134 / 6%), transparent 24rem),
+        linear-gradient(180deg, #fff8e7 0%, #fffdfa 42%, #fff8ef 100%);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      text-rendering: optimizeLegibility;
+    }
+
+    img,
+    video { max-width: 100%; display: block; }
+
+    button,
+    input,
+    select { font: inherit; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: var(--container);
+      margin: 0 auto;
+    }
+
+    .announcement {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      color: #fff;
+      background: linear-gradient(90deg, #8c5d08, #c28a12 42%, #00593f);
+      box-shadow: 0 8px 20px rgb(60 42 10 / 18%);
+    }
+
+    .announcement__inner {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .announcement__pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 18%);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .header {
+      width: var(--container);
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--green);
+      box-shadow: 0 10px 24px rgb(0 89 63 / 18%);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .header__trust {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 6px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgb(0 89 63 / 11%);
+    }
+
+    .section {
+      padding: clamp(46px, 7vw, 92px) 0;
+    }
+
+    .section--tight {
+      padding: clamp(28px, 5vw, 58px) 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: var(--fg);
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-top: 16px;
+      color: var(--accent);
+      font-size: clamp(36px, 4vw, 48px);
+      line-height: clamp(39px, 4vw, 48px);
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: clamp(30px, 3.1vw, 40px);
+      line-height: 1.08;
+    }
+
+    h3 {
+      font-size: clamp(20px, 1.8vw, 24px);
+      line-height: 1.18;
+    }
+
+    .text-gold { color: var(--accent-strong); }
+    .text-green { color: var(--green); }
+
+    .kicker {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgb(191 133 15 / 28%);
+      border-radius: 999px;
+      color: var(--accent-strong);
+      background: rgb(255 255 255 / 72%);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 18px 0 0;
+      color: #44382d;
+      font-size: clamp(17px, 1.45vw, 19px);
+    }
+
+    .hero {
+      padding: clamp(24px, 4vw, 54px) 0 clamp(54px, 8vw, 96px);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, .82fr);
+      gap: clamp(28px, 6vw, 78px);
+      align-items: center;
+    }
+
+    .button {
+      min-height: 50px;
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #fff;
+      background: var(--green);
+      cursor: pointer;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgb(0 89 63 / 20%);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #004b35;
+      box-shadow: 0 16px 32px rgb(0 89 63 / 24%);
+    }
+
+    .button--gold {
+      color: #15120c;
+      background: linear-gradient(180deg, #edc74f, #d7a928);
+      box-shadow: 0 12px 24px rgb(191 133 15 / 23%);
+    }
+
+    .button--gold:hover { background: linear-gradient(180deg, #f0ce62, #c99718); }
+
+    .button--secondary {
+      color: var(--green);
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .hero__actions,
+    .microcopy {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero__actions { margin-top: 28px; }
+
+    .risk-zero {
+      max-width: 560px;
+      margin-top: 28px;
+      padding: 0;
+    }
+
+    .risk-zero__text {
+      margin: 0 0 18px;
+      color: #382d22;
+      font-size: clamp(17px, 1.55vw, 20px);
+      line-height: 1.45;
+    }
+
+    .risk-zero__text b { color: var(--green); }
+
+    .risk-zero__button {
+      width: min(100%, 470px);
+      min-height: 58px;
+      border-radius: 12px;
+      font-size: clamp(15px, 1.35vw, 17px);
+      text-transform: uppercase;
+      box-shadow: 0 14px 26px rgb(0 89 63 / 24%);
+    }
+
+    .risk-zero__button svg,
+    .risk-zero__chips svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .risk-zero__chips {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .risk-zero__chips span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .microcopy {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: #fff;
+      background: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .hero-showcase {
+      position: relative;
+      min-height: 540px;
+      border: 1px solid rgb(191 133 15 / 24%);
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 46%, rgb(237 199 79 / 32%), transparent 15rem),
+        linear-gradient(180deg, #fffdf7, #fff2d9);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-showcase::before,
+    .hero-showcase::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .hero-showcase::before {
+      width: 320px;
+      height: 320px;
+      right: -110px;
+      top: -90px;
+      background: rgb(216 79 134 / 14%);
+    }
+
+    .hero-showcase::after {
+      width: 360px;
+      height: 130px;
+      left: 50%;
+      bottom: 94px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgb(141 90 0 / 24%), transparent 68%);
+      filter: blur(8px);
+    }
+
+    .hero-product {
+      position: absolute;
+      inset: 72px 0 auto;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+
+    .hero-product img {
+      width: min(292px, 64%);
+      filter: drop-shadow(0 30px 34px rgb(54 34 8 / 23%));
+    }
+
+    .hero-sticker {
+      position: absolute;
+      z-index: 3;
+      right: 22px;
+      top: 22px;
+      width: 132px;
+      min-height: 132px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      color: #fff;
+      background: var(--green);
+      text-align: center;
+      box-shadow: 0 16px 32px rgb(0 89 63 / 24%);
+      transform: rotate(5deg);
+    }
+
+    .hero-sticker b {
+      display: block;
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .hero-sticker span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero-proof {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      left: 20px;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .proof-chip {
+      min-height: 86px;
+      padding: 13px;
+      border: 1px solid rgb(255 255 255 / 72%);
+      border-radius: 16px;
+      background: rgb(255 255 255 / 82%);
+      box-shadow: var(--shadow-tight);
+      backdrop-filter: blur(8px);
+    }
+
+    .proof-chip b {
+      display: block;
+      font-size: 14px;
+    }
+
+    .proof-chip span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .trust-band {
+      color: #fff;
+      background: var(--green);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .trust-item {
+      min-height: 128px;
+      padding: 20px;
+      border: 1px solid rgb(255 255 255 / 18%);
+      border-radius: var(--radius);
+      background: rgb(255 255 255 / 9%);
+    }
+
+    .trust-item h3 { color: #fff; font-family: var(--font-body); font-size: 19px; }
+
+    .trust-item p {
+      margin: 8px 0 0;
+      color: rgb(255 255 255 / 76%);
+      font-size: 14px;
+    }
+
+    .section-head {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .section-head p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .result-card,
+    .quality-card,
+    .kit-card,
+    .testimonial-card,
+    .step,
+    .faq {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow-tight);
+    }
+
+    .result-card {
+      overflow: hidden;
+      position: relative;
+      padding: 8px;
+      background: linear-gradient(180deg, #fffdf4 0%, #fff9de 100%);
+    }
+
+    .result-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--radius) - 8px);
+    }
+
+    .result-note {
+      margin: 10px 4px 2px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .compliance-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border: 1px solid rgb(191 133 15 / 24%);
+      border-radius: 14px;
+      color: #5c4a35;
+      background: rgb(255 255 255 / 72%);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .quality-card {
+      margin-top: 22px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+      align-content: start;
+    }
+
+    .quality-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 310px;
+      object-fit: cover;
+    }
+
+    .quality-card__body {
+      padding: 24px;
+    }
+
+    .bullets {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .bullets li {
+      display: flex;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .offers-section {
+      background:
+        radial-gradient(circle at 50% 0%, rgb(217 173 56 / 13%), transparent 28rem),
+        #fffaf0;
+    }
+
+    .kit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .kit-card {
+      position: relative;
+      padding: 24px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .kit-card.is-featured {
+      border: 2px solid var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 46px rgb(191 133 15 / 20%);
+    }
+
+    .kit-badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 7px 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .kit-title {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .kit-subtitle {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .kit-products {
+      min-height: 196px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      padding-top: 8px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 55%, rgb(237 199 79 / 28%), transparent 44%),
+        linear-gradient(180deg, #fffdf7, #fff2dd);
+      overflow: hidden;
+    }
+
+    .kit-products img {
+      width: 92px;
+      margin: 0 -16px -6px;
+      filter: drop-shadow(0 18px 16px rgb(54 34 8 / 18%));
+    }
+
+    .kit-card[data-count="1"] .kit-products img {
+      width: 114px;
+      margin: 0;
+    }
+
+    .parcel-price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #fff7df;
+      color: var(--accent-strong);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .new-price {
+      margin-top: -8px;
+      color: var(--green);
+      font-size: clamp(34px, 3.4vw, 42px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.01em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .unit-price {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .installment {
+      margin-top: 5px;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .kit-benefits {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: #4f463c;
+      text-align: left;
+      font-weight: 800;
+    }
+
+    .kit-benefits li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .kit-card .button { width: 100%; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 22px;
+    }
+
+    .step__number {
+      width: 38px;
+      height: 38px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--green);
+      font-family: var(--font-mono);
+      font-weight: 800;
+    }
+
+    .step p,
+    .testimonial-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .testimonial-section {
+      background:
+        linear-gradient(180deg, rgb(20 17 13 / 3%), rgb(255 255 255 / 0)),
+        #f5f0e8;
+    }
+
+    .testimonial-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, .88fr) minmax(0, 1.12fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .video-panel {
+      position: sticky;
+      top: 66px;
+      padding: 16px;
+      border: 1px solid rgb(191 133 15 / 30%);
+      border-radius: 22px;
+      background: #fffdf7;
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame {
+      overflow: hidden;
+      border: 2px solid var(--accent);
+      border-radius: 18px;
+      background: #111;
+    }
+
+    .video-frame video {
+      width: 100%;
+      min-height: 440px;
+      object-fit: cover;
+      background: #111;
+    }
+
+    .video-caption {
+      margin: 14px 2px 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .testimonial-card {
+      padding: 22px;
+    }
+
+    .stars {
+      color: var(--accent);
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .testimonial-person {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--green);
+      font-weight: 800;
+    }
+
+    .faq {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .faq-item + .faq-item { border-top: 1px solid var(--border); }
+
+    .faq-button {
+      width: 100%;
+      min-height: 66px;
+      border: 0;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--fg);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .faq-panel {
+      display: none;
+      padding: 0 20px 20px;
+      color: var(--muted);
+    }
+
+    .faq-item.is-open .faq-panel { display: block; }
+
+    .faq-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: #fff;
+      background: var(--green);
+      font-weight: 800;
+    }
+
+    .final-cta {
+      color: #fff;
+      background: var(--green);
+    }
+
+    .final-cta h2 { color: #fff; }
+
+    .final-cta__grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .final-cta p {
+      max-width: 650px;
+      margin: 12px 0 0;
+      color: rgb(255 255 255 / 80%);
+    }
+
+    .footer {
+      padding: 28px 0 94px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      background: #fffdf7;
+    }
+
+    .footer__links {
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .footer__links a {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .mobile-bar {
+      position: fixed;
+      z-index: 60;
+      right: 12px;
+      bottom: 12px;
+      left: 12px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgb(255 253 247 / 94%);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-bar span,
+    .mobile-bar b { display: block; }
+
+    .mobile-bar span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 80;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgb(20 17 13 / 62%);
+    }
+
+    .modal.is-open { display: flex; }
+
+    .modal-card {
+      width: min(560px, 100%);
+      overflow: hidden;
+      border-radius: 22px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      background: #fff5dc;
+    }
+
+    .modal-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .modal-close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .order-form {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .field input,
+    .field select {
+      min-height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: var(--fg);
+      background: #fff;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: 3px solid rgb(191 133 15 / 18%);
+      border-color: var(--accent);
+    }
+
+    .form-note {
+      min-height: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero__grid,
+      .testimonial-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .quality-card {
+        grid-template-columns: 1fr;
+      }
+
+      .video-panel {
+        position: relative;
+        top: auto;
+      }
+
+      .trust-grid,
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kit-grid {
+        grid-template-columns: 1fr;
+        max-width: 620px;
+        margin: 0 auto;
+      }
+
+      .kit-card.is-featured { transform: none; }
+    }
+
+    @media (max-width: 760px) {
+      .header { min-height: 68px; }
+      .header__trust { display: none; }
+      .announcement__inner { font-size: 12px; }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p { margin-top: 10px; }
+
+      .hero-showcase {
+        min-height: auto;
+        display: grid;
+        gap: 14px;
+        padding: 22px 16px 16px;
+        border-radius: 24px;
+      }
+
+      .hero-product {
+        position: relative;
+        inset: auto;
+        min-height: 310px;
+        margin-top: 28px;
+      }
+
+      .hero-product img { width: min(76vw, 286px); }
+
+      .hero-sticker {
+        right: 14px;
+        top: 14px;
+        width: 104px;
+        min-height: 104px;
+        padding: 14px;
+      }
+
+      .hero-sticker b { font-size: 20px; }
+
+      .trust-grid,
+      .results-grid,
+      .steps-grid,
+      .testimonial-grid,
+      .final-cta__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-proof {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        z-index: 5;
+        grid-template-columns: 1fr;
+      }
+
+      .proof-chip {
+        min-height: auto;
+        padding: 12px 14px;
+      }
+
+      .quality-card img { min-height: 230px; }
+      .video-frame video { min-height: 360px; }
+      .mobile-bar { display: flex; }
+    }
+
+    @media (max-width: 430px) {
+      h1 {
+        font-size: 34px;
+        line-height: 37px;
+      }
+
+      h2 {
+        font-size: 29px;
+        line-height: 1.12;
+      }
+
+      .button { width: 100%; }
+      .mobile-bar .button { width: auto; min-width: 118px; }
+      .mobile-bar b { font-size: 14px; }
+      .kit-products { min-height: 190px; }
+      .kit-products img { width: 82px; margin-inline: -14px; }
+      .kit-card[data-count="1"] .kit-products img { width: 108px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">
+    <div class="container announcement__inner">
+      <span class="announcement__pill">Oferta ativa</span>
+      <span>Frete grátis para todo o Brasil + pague somente na entrega.</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <a class="brand" href="#top" aria-label="Liso Mágico Brasil">
+      <span class="brand-mark">LM</span>
+      <span>Liso Mágico Brasil</span>
+    </a>
+    <div class="header__trust" aria-label="Diferenciais da oferta">
+      <span><i class="trust-dot"></i>Sem formol</span>
+      <span><i class="trust-dot"></i>Pague ao receber</span>
+      <span><i class="trust-dot"></i>Frete grátis</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="kicker">Linha Premium Gold 500 ml</span>
+          <h1>O liso dos sonhos <span class="text-green">sem formol.</span> Resultado de salão em casa.</h1>
+          <p class="lead">Progressiva Liso Mágico para mulheres que querem reduzir volume, frizz e aparência ressecada sem pagar salão caro. Você pede agora e paga somente quando receber.</p>
+          <div class="risk-zero" aria-label="Pedido com risco zero">
+            <p class="risk-zero__text">Zero Risco: Nós enviamos com <b>Frete Grátis</b> e você só paga quando receber.</p>
+            <a class="button risk-zero__button" href="#ofertas">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 17.5H4.5A1.5 1.5 0 0 1 3 16V7.5A1.5 1.5 0 0 1 4.5 6h9A1.5 1.5 0 0 1 15 7.5V17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 10h2.7a1.5 1.5 0 0 1 1.2.6l1.8 2.4a1.5 1.5 0 0 1 .3.9V16a1.5 1.5 0 0 1-1.5 1.5H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="7" cy="17.5" r="2" stroke="currentColor" stroke-width="2"/>
+                <circle cx="17" cy="17.5" r="2" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              Pedir agora - pagar na entrega
+            </a>
+            <div class="risk-zero__chips">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3 5 6v5c0 4.2 2.6 7.5 7 10 4.4-2.5 7-5.8 7-10V6l-7-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="m9 12 2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Pagamento Seguro
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 17.5H4.5A1.5 1.5 0 0 1 3 16V7.5A1.5 1.5 0 0 1 4.5 6h9A1.5 1.5 0 0 1 15 7.5V17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15 10h2.7a1.5 1.5 0 0 1 1.2.6l1.8 2.4a1.5 1.5 0 0 1 .3.9V16a1.5 1.5 0 0 1-1.5 1.5H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="7" cy="17.5" r="2" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="17" cy="17.5" r="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Entrega Garantida
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-showcase" aria-label="Produto Liso Mágico em destaque">
+          <div class="hero-sticker">
+            <div>
+              <b>500 ml</b>
+              <span>sem formol</span>
+            </div>
+          </div>
+          <div class="hero-product">
+            <img src="mpy81nab-image.png" alt="Frasco Progressiva Liso Mágico Premium Gold sem formol">
+          </div>
+          <div class="hero-proof">
+            <div class="proof-chip">
+              <b>Pague na entrega</b>
+              <span>Você não antecipa o pagamento.</span>
+            </div>
+            <div class="proof-chip">
+              <b>Brilho espelhado</b>
+              <span>Foco em alinhamento e acabamento.</span>
+            </div>
+            <div class="proof-chip">
+              <b>Kits com desconto</b>
+              <span>Quanto mais potes, menor o valor por unidade.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section--tight trust-band">
+      <div class="container trust-grid">
+        <article class="trust-item">
+          <h3>Entrega garantida</h3>
+          <p>Pedido enviado com frete grátis conforme disponibilidade da oferta.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Sem formol</h3>
+          <p>Destaque principal do produto para quem evita fórmulas agressivas.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Pagamento na entrega</h3>
+          <p>Você paga quando o produto chegar ao endereço informado.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Prova em vídeo</h3>
+          <p>Depoimento real aparece antes da decisão final do kit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Resultados reais</span>
+            <h2>Brilho, alinhamento e menos frizz em fotos de antes e depois.</h2>
+          </div>
+          <p>Veja os resultados sem cortes na imagem. A prova visual vem antes da oferta para a cliente decidir com mais segurança.</p>
+        </div>
+        <div class="results-grid" aria-label="Galeria de antes e depois">
+          <article class="result-card">
+            <img src="assets/resultado-1.png" alt="Antes e depois com redução de volume e mais brilho">
+            <p class="result-note">Resultado com fios mais alinhados e acabamento brilhante.</p>
+          </article>
+          <article class="result-card">
+            <img src="assets/resultado-2.png" alt="Antes e depois com cabelo escuro mais liso e alinhado">
+            <p class="result-note">Transformação focada em controle de frizz e aspecto espelhado.</p>
+          </article>
+          <article class="result-card">
+            <img src="assets/resultado-3.png" alt="Antes e depois em cabelo loiro com fios mais alinhados">
+            <p class="result-note">Antes/depois preservado inteiro, sem cortar legendas ou cabelo.</p>
+          </article>
+          <article class="result-card">
+            <img src="assets/resultado-4.png" alt="Antes e depois com cabelo cacheado finalizado mais liso">
+            <p class="result-note">Mais disciplina visual para quem busca acabamento de salão.</p>
+          </article>
+        </div>
+                <p class="compliance-note"><b>Aviso importante:</b> resultados podem variar conforme o tipo de cabelo, condição dos fios e modo de aplicação. Siga sempre as instruções de uso do fabricante antes de aplicar.</p>
+        <article class="quality-card">
+          <img src="mpy820t9-image.png" alt="Frasco Liso Mágico em ambiente de salão">
+          <div class="quality-card__body">
+            <span class="kicker">Premium Gold</span>
+            <h3>Acabamento de salão sem sair de casa.</h3>
+            <ul class="bullets">
+              <li><i class="check">✓</i> Ajuda a reduzir volume e frizz.</li>
+              <li><i class="check">✓</i> Frasco grande de 500 ml.</li>
+              <li><i class="check">✓</i> Kits com economia por unidade.</li>
+              <li><i class="check">✓</i> Compra com pagamento na entrega.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="section offers-section" id="ofertas">
+      <div class="container">
+        <div class="section-head" style="justify-content:center;text-align:center;">
+          <div>
+            <span class="kicker">Escolha sua oferta</span>
+            <h2>Kits tradicionais com frete grátis.</h2>
+            <p style="margin:12px auto 0;">Escolha a quantidade. Todos os kits mantêm pagamento na entrega e produto 500 ml.</p>
+          </div>
+        </div>
+
+        <div class="kit-grid" role="group" aria-label="Opções de kit Liso Mágico">
+          <article class="kit-card" data-count="1" data-kit="1 Pote Liso Mágico" data-price="R$ 149,00">
+            <div>
+              <div class="kit-title">1 Pote</div>
+              <div class="kit-subtitle">Para testar</div>
+            </div>
+            <div class="kit-products">
+              <img src="mpy81nab-image.png" alt="1 pote Liso Mágico">
+            </div>
+            <div>
+              <div class="parcel-price">12x de R$ 15,28</div>
+              <div class="new-price">R$ 149,00</div>
+              <div class="unit-price">R$ 149,00 / un</div>
+              <div class="installment">Preço à vista</div>
+            </div>
+            <ul class="kit-benefits">
+              <li><i class="check">✓</i> Frete grátis</li>
+              <li><i class="check">✓</i> Pagamento na entrega</li>
+              <li><i class="check">✓</i> Sem formol - 500 ml</li>
+            </ul>
+            <a class="button" href="https://entrega.logzz.com.br/pay/memorn5ld/liso1magico" target="_blank" rel="noopener">Pedir agora e pagar na entrega</a>
+          </article>
+
+          <article class="kit-card is-featured" data-count="2" data-kit="2 Potes Liso Mágico" data-price="R$ 197,00">
+            <div class="kit-badge">Mais vendido</div>
+            <div>
+              <div class="kit-title">2 Potes</div>
+              <div class="kit-subtitle">Kit tratamento completo</div>
+            </div>
+            <div class="kit-products">
+              <img src="mpy81nab-image.png" alt="">
+              <img src="mpy81nab-image.png" alt="2 potes Liso Mágico">
+            </div>
+            <div>
+              <div class="parcel-price">12x de R$ 20,20</div>
+              <div class="new-price">R$ 197,00</div>
+              <div class="unit-price">R$ 98,50 / un</div>
+              <div class="installment">Preço à vista</div>
+            </div>
+            <ul class="kit-benefits">
+              <li><i class="check">✓</i> Frete grátis</li>
+              <li><i class="check">✓</i> Pagamento na entrega</li>
+              <li><i class="check">✓</i> Sem formol - 500 ml</li>
+            </ul>
+            <a class="button" href="https://entrega.logzz.com.br/pay/memorn5ld/liso2magico" target="_blank" rel="noopener">Pedir agora e pagar na entrega</a>
+          </article>
+
+          <article class="kit-card" data-count="3" data-kit="3 Potes Liso Mágico" data-price="R$ 397,00">
+            <div class="kit-badge">Kit completo</div>
+            <div>
+              <div class="kit-title">3 Potes</div>
+              <div class="kit-subtitle">Para manter estoque</div>
+            </div>
+            <div class="kit-products">
+              <img src="mpy81nab-image.png" alt="">
+              <img src="mpy81nab-image.png" alt="">
+              <img src="mpy81nab-image.png" alt="3 potes Liso Mágico">
+            </div>
+            <div>
+              <div class="parcel-price">12x de R$ 40,71</div>
+              <div class="new-price">R$ 397,00</div>
+              <div class="unit-price">R$ 132,33 / un</div>
+              <div class="installment">Preço à vista</div>
+            </div>
+            <ul class="kit-benefits">
+              <li><i class="check">✓</i> Frete grátis</li>
+              <li><i class="check">✓</i> Pagamento na entrega</li>
+              <li><i class="check">✓</i> Sem formol - 500 ml</li>
+            </ul>
+            <a class="button" href="https://entrega.logzz.com.br/pay/memorn5ld/liso3unidades" target="_blank" rel="noopener">Pedir agora e pagar na entrega</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Como funciona</span>
+            <h2>Pedido simples, sem pagar antes.</h2>
+          </div>
+          <p>Você escolhe o kit, abre a página segura da Logzz e finaliza o pedido com pagamento na entrega.</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step">
+            <div class="step__number">01</div>
+            <h3>Escolha seu kit</h3>
+            <p>Escolha o kit com 1, 2 ou 3 potes, fotos do produto e preço claro.</p>
+          </article>
+          <article class="step">
+            <div class="step__number">02</div>
+            <h3>Abra a Logzz</h3>
+            <p>O botão leva direto para a página de compra, sem formulário intermediário.</p>
+          </article>
+          <article class="step">
+            <div class="step__number">03</div>
+            <h3>Pague ao receber</h3>
+            <p>Pagamento somente na entrega, conforme disponibilidade da oferta.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonial-section" id="depoimentos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Quem usou, aprovou</span>
+            <h2>Depoimento em vídeo + provas antes do pedido.</h2>
+          </div>
+          <p>Assista ao depoimento e veja os pontos que mais importam antes de pedir: resultado, entrega e segurança no pagamento.</p>
+        </div>
+        <div class="testimonial-layout">
+          <article class="video-panel" aria-label="Védeo de depoimento Liso Mágico">
+            <div class="video-frame">
+              <video controls playsinline preload="metadata" poster="mpy820t9-image.png">
+                <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/depoimento-Qz2QxVWClo52CmXzMUck4VAuTP1EwL.mp4" type="video/mp4">
+                Seu navegador não conseguiu carregar o vídeo de depoimento.
+              </video>
+            </div>
+            <p class="video-caption">Assista ao depoimento antes de escolher seu kit.</p>
+          </article>
+
+          <div class="testimonial-grid">
+            <article class="testimonial-card">
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <p>"Eu tinha medo de comprar pela internet, mas poder pagar na entrega deixou muito mais seguro."</p>
+              <div class="testimonial-person"><span class="avatar">C</span><span>Cliente<br><small>Pedido com pagamento na entrega</small></span></div>
+            </article>
+            <article class="testimonial-card">
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <p>"Gostei porque o kit já mostra quantos potes vêm. Fica mais fácil escolher sem dúvida."</p>
+              <div class="testimonial-person"><span class="avatar">M</span><span>Cliente<br><small>Compra de kit</small></span></div>
+            </article>
+            <article class="testimonial-card">
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <p>"O que mais chamou atenção foi o brilho no resultado e a promessa de não ter formol."</p>
+              <div class="testimonial-person"><span class="avatar">A</span><span>Cliente<br><small>Resultado visual</small></span></div>
+            </article>
+            <article class="testimonial-card">
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <p>"Frete grátis e pagamento na entrega foram os dois motivos que me fizeram pedir."</p>
+              <div class="testimonial-person"><span class="avatar">R</span><span>Cliente<br><small>Frete grátis</small></span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head" style="justify-content:center;text-align:center;">
+          <div>
+            <span class="kicker">Perguntas frequentes</span>
+            <h2>Tire as dúvidas antes de pedir.</h2>
+          </div>
+        </div>
+        <div class="faq">
+          <article class="faq-item is-open">
+            <button class="faq-button" type="button" aria-expanded="true">
+              <span>Como funciona o pagamento?</span>
+              <span class="faq-icon">-</span>
+            </button>
+            <div class="faq-panel">Você faz o pedido agora e paga somente quando o produto chegar ao endereço informado, conforme disponibilidade de entrega.</div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span>O frete é realmente grátis?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-panel">A página comunica frete grátis para pedidos disponíveis. Confirme a cobertura antes de rodar tráfego pago.</div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span>O produto tem formol?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-panel">O rótulo destaca "sem formol". Antes de veicular anúncios, confirme composição, registro, modo de uso e restrições diretamente nos materiais oficiais do produto.</div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span>Como devo usar?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-panel">Use somente conforme as instruções do fabricante. Respeite tempo de ação, quantidade indicada e etapa de enxágue/finalização descritas na embalagem.</div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span>Existe alguma contraindicação?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-panel">Não aplique em couro cabeludo irritado, lesionado ou sensibilizado. Em caso de alergia, química recente, gestação, amamentação ou dúvida, consulte um profissional e siga as orientações da embalagem.</div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span>Qual kit vale mais a pena?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-panel">O kit de 2 potes é o melhor custo por unidade. O kit de 3 potes é indicado para quem quer manter estoque em casa.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <div class="container final-cta__grid">
+        <div>
+          <span class="kicker">Não perca essa oportunidade</span>
+          <h2>Garanta seu Liso Mágico com frete grátis.</h2>
+          <p>Clique no botão, finalize na Logzz e pague somente quando receber. Oferta sujeita à disponibilidade de entrega.</p>
+        </div>
+        <a class="button button--gold" href="#ofertas">Pedir agora e pagar na entrega</a>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="container">
+      <nav class="footer__links" aria-label="Links legais">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+        <a href="trocas-e-devolucoes.html">Trocas e Devoluções</a>
+      </nav>
+      Liso Mágico Brasil · Frete grátis e pagamento na entrega conforme disponibilidade da oferta. Confirme composição, modo de uso e restrições antes da aplicação. Resultados podem variar.
+    </div>
+  </footer>
+
+  <div class="mobile-bar" aria-label="Atalho para pedido">
+    <div>
+      <span>Oferta disponível</span>
+      <b>Pague na entrega</b>
+    </div>
+    <a class="button" href="#ofertas">Pedir agora</a>
+  </div>
+  <script>
+    document.querySelectorAll('.faq-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.querySelector('.faq-icon').textContent = isOpen ? '-' : '+';
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
